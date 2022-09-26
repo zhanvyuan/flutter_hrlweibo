@@ -75,7 +75,8 @@ class _RetWeetPageState extends State<RetWeetPage> {
     // TODO: implement initState
     super.initState();
     var keyboardVisibilityController = KeyboardVisibilityController();
-    keyboardSubscription = keyboardVisibilityController.onChange.listen((bool visible) {
+    keyboardSubscription =
+        keyboardVisibilityController.onChange.listen((bool visible) {
       final keyHeight = MediaQuery.of(context).viewInsets.bottom;
       if (keyHeight != 0) {
         SpUtil.putDouble(Constant.SP_KEYBOARD_HEGIHT, keyHeight);
@@ -95,8 +96,7 @@ class _RetWeetPageState extends State<RetWeetPage> {
           });
         }
       }
-     });
-
+    });
   }
 
   Widget _retweettitle() {
@@ -120,7 +120,7 @@ class _RetWeetPageState extends State<RetWeetPage> {
                 children: <Widget>[
                   Text('转发微博',
                       style: TextStyle(fontSize: 16, color: Colors.black)),
-                  Text(UserUtil.getUserInfo().nick??"null",
+                  Text(UserUtil.getUserInfo().nick ?? "null",
                       style: TextStyle(fontSize: 12, color: Colors.grey))
                 ],
               ),
@@ -139,8 +139,8 @@ class _RetWeetPageState extends State<RetWeetPage> {
                     "zfContent": mEtController.text,
                     "zfWeiBoId": widget.mModel.weiboId
                   });
-                  DioManager.instance
-                      .post(ServiceUrl.forwardWeiBo, formData, (data) {
+                  DioManager.instance.post(ServiceUrl.forwardWeiBo, formData,
+                      (data) {
                     ToastUtil.show('提交成功!');
                     setState(() {
                       mEtController.clear();
@@ -250,7 +250,7 @@ class _RetWeetPageState extends State<RetWeetPage> {
                                         content: new Text("$url clicked."),
                                         actions: <Widget>[
                                           // usually buttons at the bottom of the dialog
-                                          new FlatButton(
+                                          new TextButton(
                                             child: new Text("Close"),
                                             onPressed: () {},
                                           ),
@@ -301,7 +301,7 @@ class _RetWeetPageState extends State<RetWeetPage> {
                                         content: new Text("点击的id:" + url),
                                         actions: <Widget>[
                                           // usually buttons at the bottom of the dialog
-                                          new FlatButton(
+                                          new TextButton(
                                             child: new Text("Close"),
                                             onPressed: () {},
                                           ),
@@ -319,10 +319,11 @@ class _RetWeetPageState extends State<RetWeetPage> {
                               ),
                               renderText: ({String? str, String? pattern}) {
                                 Map<String, String> map = Map<String, String>();
-                                 String mEmoji2 = "";
+                                String mEmoji2 = "";
                                 try {
                                   String mEmoji = str?.replaceAll(
-                                      RegExp('(\\[/)|(\\])'), "")??"";
+                                          RegExp('(\\[/)|(\\])'), "") ??
+                                      "";
                                   int mEmojiNew = int.parse(mEmoji);
                                   mEmoji2 = String.fromCharCode(mEmojiNew);
                                 } on Exception catch (_) {
@@ -359,7 +360,7 @@ class _RetWeetPageState extends State<RetWeetPage> {
                                         content: new Text("点击的id:" + url),
                                         actions: <Widget>[
                                           // usually buttons at the bottom of the dialog
-                                          new FlatButton(
+                                          new TextButton(
                                             child: new Text("Close"),
                                             onPressed: () {},
                                           ),

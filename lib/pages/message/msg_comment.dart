@@ -28,8 +28,7 @@ class _MsgCommentPageState extends State<MsgCommentPage> {
       "pageNum": "1",
       "pageSize": Constant.PAGE_SIZE,
     });
-    DioManager.instance.post(ServiceUrl.getMsgCommentList, formData,
-        (data) {
+    DioManager.instance.post(ServiceUrl.getMsgCommentList, formData, (data) {
       ComZanListModel mList = ComZanListModel.fromJson(data['data']);
       mZanList.clear();
       mZanList = mList.list;
@@ -245,7 +244,7 @@ class _MsgCommentPageState extends State<MsgCommentPage> {
                                         content: new Text("$url clicked."),
                                         actions: <Widget>[
                                           // usually buttons at the bottom of the dialog
-                                          new FlatButton(
+                                          new TextButton(
                                             child: new Text("Close"),
                                             onPressed: () {},
                                           ),
@@ -289,7 +288,7 @@ class _MsgCommentPageState extends State<MsgCommentPage> {
                                         content: new Text("点击的id:" + url),
                                         actions: <Widget>[
                                           // usually buttons at the bottom of the dialog
-                                          new FlatButton(
+                                          new TextButton(
                                             child: new Text("Close"),
                                             onPressed: () {},
                                           ),
@@ -307,10 +306,11 @@ class _MsgCommentPageState extends State<MsgCommentPage> {
                               ),
                               renderText: ({String? str, String? pattern}) {
                                 Map<String, String> map = Map<String, String>();
-                                 String mEmoji2 = "";
+                                String mEmoji2 = "";
                                 try {
                                   String mEmoji = str?.replaceAll(
-                                      RegExp('(\\[/)|(\\])'), "")??"";
+                                          RegExp('(\\[/)|(\\])'), "") ??
+                                      "";
                                   int mEmojiNew = int.parse(mEmoji);
                                   mEmoji2 = String.fromCharCode(mEmojiNew);
                                 } on Exception catch (_) {
@@ -347,7 +347,7 @@ class _MsgCommentPageState extends State<MsgCommentPage> {
                                         content: new Text("点击的id:" + url),
                                         actions: <Widget>[
                                           // usually buttons at the bottom of the dialog
-                                          new FlatButton(
+                                          new TextButton(
                                             child: new Text("Close"),
                                             onPressed: () {},
                                           ),

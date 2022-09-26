@@ -67,22 +67,7 @@ class _ChangeNickNamePageState extends State<ChangeNickNamePage> {
                 margin: const EdgeInsets.only(top: 60.0, left: 20, right: 20),
                 child: SizedBox(
                   width: double.infinity,
-                  child: new RaisedButton(
-                    color: Color(0xffFF8200),
-                    textColor: Colors.white,
-                    disabledTextColor: Colors.white,
-                    disabledColor: Color(0xffFFD8AF),
-                    elevation: 0,
-                    disabledElevation: 0,
-                    highlightElevation: 0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(25.0),
-                        topLeft: Radius.circular(25.0),
-                        bottomRight: Radius.circular(25.0),
-                        bottomLeft: Radius.circular(25.0),
-                      ),
-                    ),
+                  child: new ElevatedButton(
                     onPressed: () {
                       if (_mEtController.text.isEmpty) {
                         ToastUtil.show('昵称不能为空!');
@@ -92,8 +77,8 @@ class _ChangeNickNamePageState extends State<ChangeNickNamePage> {
                         'userId': UserUtil.getUserInfo().id,
                         'nick': _mEtController.text
                       });
-                      DioManager.instance
-                          .post(ServiceUrl.updateNick, params, (data) {
+                      DioManager.instance.post(ServiceUrl.updateNick, params,
+                          (data) {
                         ToastUtil.show('修改昵称成功!');
                         UserUtil.saveUserNick(_mEtController.text);
                         Constant.eventBus.fire(ChangeInfoEvent());

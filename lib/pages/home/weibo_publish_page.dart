@@ -32,9 +32,9 @@ class _WeiBoPublishPageState extends State<WeiBoPublishPage> {
   double _softKeyHeight = SpUtil.getDouble(Constant.SP_KEYBOARD_HEGIHT, 200);
   late StreamSubscription<bool> keyboardSubscription;
 
-  List<XFile?> mFileList =[];
+  List<XFile?> mFileList = [];
   XFile? mSelectedImageFile;
-  List<MultipartFile> mSubmitFileList =[];
+  List<MultipartFile> mSubmitFileList = [];
 
   MySpecialTextSpanBuilder _mySpecialTextSpanBuilder =
       MySpecialTextSpanBuilder();
@@ -45,7 +45,8 @@ class _WeiBoPublishPageState extends State<WeiBoPublishPage> {
     super.initState();
     var keyboardVisibilityController = KeyboardVisibilityController();
     // Subscribe
-    keyboardSubscription = keyboardVisibilityController.onChange.listen((bool visible) {
+    keyboardSubscription =
+        keyboardVisibilityController.onChange.listen((bool visible) {
       if (visible) {
         mEmojiLayoutShow = false;
 
@@ -60,9 +61,9 @@ class _WeiBoPublishPageState extends State<WeiBoPublishPage> {
             mBottomLayoutShow = false;
           });
         }
-      }print('Keyboard visibility update. Is visible: $visible');
+      }
+      print('Keyboard visibility update. Is visible: $visible');
     });
-
 
     _mEtController.addListener(_printLatestValue);
   }
@@ -138,7 +139,7 @@ class _WeiBoPublishPageState extends State<WeiBoPublishPage> {
                 children: <Widget>[
                   Text('发微博',
                       style: TextStyle(fontSize: 16, color: Colors.black)),
-                  Text(UserUtil.getUserInfo().nick??"null",
+                  Text(UserUtil.getUserInfo().nick ?? "null",
                       style: TextStyle(fontSize: 12, color: Colors.grey))
                 ],
               ),
@@ -155,15 +156,15 @@ class _WeiBoPublishPageState extends State<WeiBoPublishPage> {
                   mSubmitFileList.clear();
                   for (int i = 0; i < mFileList.length; i++) {
                     mSubmitFileList.add(MultipartFile.fromFileSync(
-                        mFileList.elementAt(i)?.path??""));
+                        mFileList.elementAt(i)?.path ?? ""));
                   }
                   FormData formData = FormData.fromMap({
                     "userId": "1",
                     "content": _mEtController.text,
                     "files": mSubmitFileList
                   });
-                  DioManager.instance
-                      .post(ServiceUrl.publishWeiBo, formData, (data) {
+                  DioManager.instance.post(ServiceUrl.publishWeiBo, formData,
+                      (data) {
                     ToastUtil.show('提交成功!');
                     setState(() {
                       mFileList.clear();
@@ -252,14 +253,15 @@ class _WeiBoPublishPageState extends State<WeiBoPublishPage> {
                     // 如果已添加了9张图片，则提示不允许添加更多
                     num size = mFileList.length;
                     if (size >= 9) {
-                      Scaffold.of(context).showSnackBar(SnackBar(
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         content: Text("最多只能添加9张图片！"),
                       ));
                       return;
                     }
                     final ImagePicker _picker = ImagePicker();
-                    final Future<XFile?> image =   _picker.pickImage(source: ImageSource.gallery);
-                     image .then((result) {
+                    final Future<XFile?> image =
+                        _picker.pickImage(source: ImageSource.gallery);
+                    image.then((result) {
                       setState(() {
                         mSelectedImageFile = result;
                       });
@@ -273,7 +275,7 @@ class _WeiBoPublishPageState extends State<WeiBoPublishPage> {
                   children: <Widget>[
                     Center(
                       child: Image.file(
-                        File(mFileList[index]?.path??"")  ,
+                        File(mFileList[index]?.path ?? ""),
                         width: double.infinity,
                         height: double.infinity,
                         fit: BoxFit.cover,
@@ -347,10 +349,10 @@ class _WeiBoPublishPageState extends State<WeiBoPublishPage> {
                       height: 25.0,
                     ),
                     onTap: () {
-
                       final ImagePicker _picker = ImagePicker();
-                      final Future<XFile?> image =   _picker.pickImage(source: ImageSource.gallery);
-                       image.then((result) {
+                      final Future<XFile?> image =
+                          _picker.pickImage(source: ImageSource.gallery);
+                      image.then((result) {
                         setState(() {
                           mSelectedImageFile = result;
                         });

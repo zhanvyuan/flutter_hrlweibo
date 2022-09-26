@@ -103,14 +103,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget buildLoginBtn() {
     return new Container(
       margin: const EdgeInsets.only(left: 20.0, right: 20.0, top: 60.0),
-      child: new RaisedButton(
-        color: Color(0xffFF8200),
-        textColor: Colors.white,
-        disabledTextColor: Colors.white,
-        disabledColor: Color(0xffFFD8AF),
-        elevation: 0,
-        disabledElevation: 0,
-        highlightElevation: 0,
+      child: new ElevatedButton(
         onPressed: (_inputAccount.isEmpty || _inputPwd.isEmpty)
             ? null
             : () {

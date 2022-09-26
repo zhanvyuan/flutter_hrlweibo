@@ -34,7 +34,7 @@ typedef InputCounterWidgetBuilder = Widget Function(
 class _TextSpanFieldSelectionGestureDetectorBuilder
     extends TextSelectionGestureDetectorBuilder {
   _TextSpanFieldSelectionGestureDetectorBuilder({
-     required _TextSpanFieldState state,
+    required _TextSpanFieldState state,
   })  : _state = state,
         super(delegate: state);
 
@@ -372,7 +372,7 @@ class TextSpanField extends StatefulWidget {
   /// Controls the text being edited.
   ///
   /// If null, this widget will create its own [TextEditingController].
-  final   TextEditingController? controller;
+  final TextEditingController? controller;
 
   /// Defines the keyboard focus for this widget.
   ///
@@ -847,7 +847,8 @@ class _TextSpanFieldState extends State<TextSpanField>
         return effectiveDecoration.copyWith(
           errorText: effectiveDecoration.errorText ?? '',
           counterStyle: effectiveDecoration.errorStyle ??
-              themeData.textTheme.caption!.copyWith(color: themeData.errorColor),
+              themeData.textTheme.caption!
+                  .copyWith(color: themeData.errorColor),
           counterText: counterText,
           semanticCounterText: semanticCounterText,
         );
@@ -875,10 +876,11 @@ class _TextSpanFieldState extends State<TextSpanField>
   void didUpdateWidget(TextSpanField oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.controller == null && oldWidget.controller != null)
-      _controller = TextEditingController.fromValue(oldWidget.controller!.value);
+      _controller =
+          TextEditingController.fromValue(oldWidget.controller!.value);
     else if (widget.controller != null && oldWidget.controller == null)
       //_controller = null;
-    _effectiveFocusNode.canRequestFocus = _isEnabled;
+      _effectiveFocusNode.canRequestFocus = _isEnabled;
     if (_effectiveFocusNode.hasFocus && widget.readOnly != oldWidget.readOnly) {
       if (_effectiveController.selection.isCollapsed) {
         _showSelectionHandles = !widget.readOnly!;
@@ -947,7 +949,7 @@ class _TextSpanFieldState extends State<TextSpanField>
   void _handleHover(bool hovering) {
     if (hovering != _isHovering) {
       setState(() {
-          _isHovering = hovering;
+        _isHovering = hovering;
       });
     }
   }
@@ -961,7 +963,8 @@ class _TextSpanFieldState extends State<TextSpanField>
     assert(
       !(widget.style != null &&
           widget.style!.inherit == false &&
-          (widget.style!.fontSize == null || widget.style!.textBaseline == null)),
+          (widget.style!.fontSize == null ||
+              widget.style!.textBaseline == null)),
       'inherit false style must supply fontSize and textBaseline',
     );
 
@@ -1001,7 +1004,7 @@ class _TextSpanFieldState extends State<TextSpanField>
         textSelectionControls = materialTextSelectionControls;
         paintCursorAboveText = false;
         cursorOpacityAnimates = false;
-        cursorColor ??= themeData.cursorColor;
+        // cursorColor ??= themeData.cursorColor;
         break;
     }
 
@@ -1029,7 +1032,7 @@ class _TextSpanFieldState extends State<TextSpanField>
         maxLines: widget.maxLines,
         minLines: widget.minLines,
         expands: widget.expands,
-        selectionColor: themeData.textSelectionColor,
+        // selectionColor: themeData.textSelectionColor,
         selectionControls:
             widget.selectionEnabled ? textSelectionControls : null,
         onChanged: widget.onChanged,

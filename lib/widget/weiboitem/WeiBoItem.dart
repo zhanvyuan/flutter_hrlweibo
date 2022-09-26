@@ -257,7 +257,7 @@ Widget textContent(String mTextContent, BuildContext context, bool isDetail) {
                 color: Color(0xff5B778D),
                 fontSize: 15,
               ),
-              renderText: ({String  str='', String  pattern=''}) {
+              renderText: ({String str = '', String pattern = ''}) {
                 Map<String, String?> map = Map<String, String>();
                 RegExp customRegExp = RegExp(pattern);
                 RegExpMatch? match = customRegExp.firstMatch(str);
@@ -296,7 +296,7 @@ Widget textContent(String mTextContent, BuildContext context, bool isDetail) {
                 color: Color(0xff5B778D),
                 fontSize: 15,
               ),
-              renderText: ({String str='', String pattern=''}) {
+              renderText: ({String str = '', String pattern = ''}) {
                 Map<String, String> map = Map<String, String>();
 
                 String idStr =
@@ -335,7 +335,8 @@ Widget textContent(String mTextContent, BuildContext context, bool isDetail) {
               Map<String, String> map = Map<String, String>();
               String mEmoji2 = "";
               try {
-                String mEmoji = str?.replaceAll(RegExp('(\\[/)|(\\])'), "")??"";
+                String mEmoji =
+                    str?.replaceAll(RegExp('(\\[/)|(\\])'), "") ?? "";
                 int mEmojiNew = int.parse(mEmoji);
                 mEmoji2 = String.fromCharCode(mEmojiNew);
               } on Exception catch (_) {
@@ -369,7 +370,7 @@ Widget textContent(String mTextContent, BuildContext context, bool isDetail) {
                       content: new Text("点击全文了"),
                       actions: <Widget>[
                         // usually buttons at the bottom of the dialog
-                        new FlatButton(
+                        new TextButton(
                           child: new Text("Close"),
                           onPressed: () {},
                         ),
