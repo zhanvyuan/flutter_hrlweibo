@@ -45,7 +45,7 @@ class _MsgCommentPageState extends State<MsgCommentPage> {
     });
     await DioManager.instance.post(ServiceUrl.getMsgCommentList, formData,
         (data) {
-      ComZanListModel mList = ComZanListModel.fromJson(data['data']);
+      ComZanListModel mList = ComZanListModel.fromJson(data);
       mZanList.addAll(mList.list);
       setState(() {
         isloadingMore = false;
