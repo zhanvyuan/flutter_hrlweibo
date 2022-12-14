@@ -41,19 +41,26 @@ class LoginScreen extends StatelessWidget {
                   children: <Widget>[
                     const TitleWidget(),
                     Container(
-                      margin: const EdgeInsets.only(left: 20.0, top: 30.0, bottom: 20),
-                      child: Text("请输入账号密码",style: TextStyle(fontSize: 24.0, color: Colors.black)),
+                      margin: const EdgeInsets.only(
+                          left: 20.0, top: 30.0, bottom: 20),
+                      child: Text("请输入账号密码",
+                          style:
+                              TextStyle(fontSize: 24.0, color: Colors.black)),
                     ),
                     Container(
                       margin: EdgeInsets.only(top: 10, left: 20, right: 20),
-                      child: AccountEditText(contentStrCallBack: (content) {
-                           context.read<LoginBtnProvider>().setInputAccount(content);
-                         },
+                      child: AccountEditText(
+                        contentStrCallBack: (content) {
+                          context
+                              .read<LoginBtnProvider>()
+                              .setInputAccount(content);
+                        },
                       ),
                     ),
                     Container(
                       margin: EdgeInsets.only(top: 10, left: 20, right: 20),
-                      child: PwdEditText(contentStrCallBack: (content) {
+                      child: PwdEditText(
+                        contentStrCallBack: (content) {
                           context.read<LoginBtnProvider>().setInputPwd(content);
                         },
                       ),
@@ -63,87 +70,8 @@ class LoginScreen extends StatelessWidget {
                     OtherLoginWidget(),
                   ],
                 ),
-                new Container(
-                  margin: EdgeInsets.only(top: 10, left: 20, right: 20),
-                  child: AccountEditText(
-                    contentStrCallBack: (content) {
-                      _inputAccount = content;
-                      setState(() {});
-                    },
-                  ),
-                ),
-                new Container(
-                  margin: EdgeInsets.only(top: 10, left: 20, right: 20),
-                  child: PwdEditText(
-                    contentStrCallBack: (content) {
-                      _inputPwd = content;
-                      setState(() {});
-                    },
-                  ),
-                ),
-                buildLoginBtn(),
-                buildRegistForget(),
-                buildOtherLoginWay(),
-              ],
-            ),
-          )),
-    );
-  }
-
-  Widget buildTile() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween, //子组件的排列方式为主轴两端对齐
-      children: <Widget>[
-        new InkWell(
-          child: new Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Image.asset(
-                Constant.ASSETS_IMG + 'icon_close.png',
-                width: 20.0,
-                height: 20.0,
-              )),
-          onTap: () {
-            Navigator.pop(context);
-          },
-        ),
-        new InkWell(
-          child: new Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: new Text(
-                "帮助",
-                style: new TextStyle(fontSize: 16.0, color: Color(0xff6B91BB)),
-              )),
-          onTap: () {},
-        ),
-      ],
-    );
-  }
-
-  Widget buildLoginBtn() {
-    return new Container(
-      margin: const EdgeInsets.only(left: 20.0, right: 20.0, top: 60.0),
-      child: new ElevatedButton(
-        onPressed: (_inputAccount.isEmpty || _inputPwd.isEmpty)
-            ? null
-            : () {
-                FormData params = FormData.fromMap(
-                    {'username': _inputAccount, 'password': _inputPwd});
-                DioManager.instance.post(ServiceUrl.login, params, (data) {
-                  UserUtil.saveUserInfo(data['data']);
-                  ToastUtil.show('登录成功!');
-                  Navigator.pop(context);
-                  Routes.navigateTo(context, Routes.indexPage);
-                }, (error) {
-                  ToastUtil.show(error);
-                });
-              },
-        child: new Padding(
-          padding: new EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
-          child: new Text(
-            "登  录",
-            style: new TextStyle(fontSize: 16.0),
-          ),
-        ),
+              ),
+            )),
       ),
     );
   }
@@ -155,20 +83,22 @@ class RegistForgetWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print("RegistForgetWidget的build方法");
-     return Row(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween, //子组件的排列方式为主轴两端对齐
       children: <Widget>[
         InkWell(
           child: Padding(
               padding: const EdgeInsets.only(left: 20.0, top: 3),
-              child: Text( "注册",style: TextStyle(fontSize: 13.0, color: Color(0xff6B91BB)))
-          ),
+              child: Text("注册",
+                  style: TextStyle(fontSize: 13.0, color: Color(0xff6B91BB)))),
           onTap: () {},
         ),
         InkWell(
           child: Padding(
               padding: const EdgeInsets.only(right: 20.0, top: 3),
-              child: Text("忘记密码",style: TextStyle(fontSize: 13.0, color: Color(0xff6B91BB)),
+              child: Text(
+                "忘记密码",
+                style: TextStyle(fontSize: 13.0, color: Color(0xff6B91BB)),
               )),
           onTap: () {},
         ),
@@ -183,7 +113,7 @@ class OtherLoginWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print("OtherLoginWidget的build方法");
-     return Container(
+    return Container(
         margin: EdgeInsets.only(top: 150),
         child: Column(
           children: <Widget>[
@@ -201,7 +131,9 @@ class OtherLoginWidget extends StatelessWidget {
                 Expanded(
                   child: Container(
                     child: Center(
-                      child: Text( '其他登陆方式',style:TextStyle(fontSize: 12, color: Color(0xff999999))),
+                      child: Text('其他登陆方式',
+                          style: TextStyle(
+                              fontSize: 12, color: Color(0xff999999))),
                     ),
                   ),
                   flex: 1,
@@ -231,7 +163,9 @@ class OtherLoginWidget extends StatelessWidget {
                       ),
                       Container(
                         margin: EdgeInsets.only(top: 5),
-                        child: Text( '微信',style:TextStyle(fontSize: 12, color: Color(0xff999999))),
+                        child: Text('微信',
+                            style: TextStyle(
+                                fontSize: 12, color: Color(0xff999999))),
                       )
                     ],
                   ),
@@ -286,8 +220,11 @@ class LoginBtn extends StatelessWidget {
           foregroundColor: MaterialStateProperty.all(Colors.white),
           elevation: MaterialStateProperty.all(0),
         ),
-        onPressed: (mCount.isEmpty || mPwd.isEmpty) ? null : () {
-                FormData params = FormData.fromMap({'username': mCount, 'password': mPwd});
+        onPressed: (mCount.isEmpty || mPwd.isEmpty)
+            ? null
+            : () {
+                FormData params =
+                    FormData.fromMap({'username': mCount, 'password': mPwd});
                 DioManager.instance.post(ServiceUrl.login, params, (data) {
                   UserUtil.saveUserInfo(data);
                   ToastUtil.show('登录成功!');
@@ -299,8 +236,7 @@ class LoginBtn extends StatelessWidget {
               },
         child: Padding(
             padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
-            child: Text("登录", style: TextStyle(fontSize: 16.0))
-        ),
+            child: Text("登录", style: TextStyle(fontSize: 16.0))),
       ),
     );
   }
@@ -330,8 +266,8 @@ class TitleWidget extends StatelessWidget {
         InkWell(
           child: Padding(
               padding: const EdgeInsets.all(12.0),
-              child: Text( "帮助",style: TextStyle(fontSize: 16.0, color: Color(0xff6B91BB)))
-          ),
+              child: Text("帮助",
+                  style: TextStyle(fontSize: 16.0, color: Color(0xff6B91BB)))),
           onTap: () {},
         ),
       ],
